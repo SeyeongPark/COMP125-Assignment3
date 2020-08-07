@@ -8,44 +8,24 @@
 
 // IIFE -Immediately Ivoked Function Expression
 (function () {
-    function highlightActiveLink(id) {
+    let title = document.title.toLowerCase();
+    function highlightActiveLink(id) 
+    {
         let navAnchors = document.querySelectorAll("li a");
-        for (const anchor of navAnchors) {
-            anchor.className = "nav-link";
+        for (const anchor of navAnchors) 
+        {
+         anchor.className = "nav-link";
         }
-        for (const anchor of navAnchors) {
+        for (const anchor of navAnchors) 
+        {
             let anchorString = anchor.getAttribute("id");
-            if (id === anchorString) {
+            if (id === anchorString)
+            {
                 anchor.className = "nav-link active";
             }
         }
     }
-    function loadHomeData() {
-        console.info("Homepage Loading...");
-        highlightActiveLink();
-        // step 1 - creates the XHR object
-        let XHR = new XMLHttpRequest();
-        // step 2 - configures the message
-        XHR.open("GET", "./Scripts/paragraphs.json");
-        // step 3 - Executes the request
-        XHR.send();
-        // step 4 - register the readystate event 
-        XHR.addEventListener("readystatechange", function () {
-            if ((XHR.readyState === 4) && (XHR.status === 200)) {
-                let dataFile = JSON.parse(XHR.responseText);
-                let ParagraCont = dataFile.paragraphs;
-                console.log(ParagraCont);
-                // Declare each paragraph by using classname and creating element
-                let jumbotron = document.getElementsByClassName("jumbotron")[0];
-                let HomePra = document.createElement("p");
-                 //Call paragraphs from 'paragraphs.json' file
-                HomePra.innerHTML = ParagraCont[0].Textcontent;
-                 // Print jumbotron
-                jumbotron.appendChild(HomePra);
 
-            }
-        });
-    }
 
     function validateForm() {
         let contact = new Contact();
@@ -118,13 +98,32 @@
             localStorage.clear();
         });
     }
-
-    function InitializeSite() {
+        // Set page content on the web address bar
+        function setPageContent() {        
+            loadHeader();   
+            // content switcher     
+            switch (title) {
+                case "home":
+                    loadHomeData();
+                    break;
+                case "contact":
+                    loadContactData();
+                    break;
+                case "projects":
+                    loadProjectData();
+                    break; 
+                default:
+                    break;
+            }
+            loadFooter();
+        }
+    // function for Load header
+    function loadHeader() {
         console.info("Header Loading...");
         // step 1 - creates the XHR object
         let XHR = new XMLHttpRequest();
         // step 2 - configures the message
-        XHR.open("GET", "./Views/partials/header.html");
+        XHR.open("GET", "./Scripts/Views/partials/header.html");
         // step 3 - Executes the request
         XHR.send();
         XHR.addEventListener("readystatechange", function () {
@@ -132,19 +131,51 @@
                 let header = document.getElementsByTagName("header")[0];
                 let headerData = XHR.responseText;
                 header.innerHTML = headerData;
-                setPageContent("Home");
-                let navLinks = document.getElementsByTagName("a");
-                for (const link of navLinks) {
-                    link.addEventListener("click", (event) => {
-                        event.preventDefault();
-                        let id = link.getAttribute("id");
-                        setPageContent(id);
-                    });
-                }
             }
         });
     }
-
+    function loadHomeData() {
+        console.info("Homepage Loading...");
+        highlightActiveLink();
+        // step 1 - creates the XHR object
+        let XHR = new XMLHttpRequest();
+        // step 2 - configures the message
+        XHR.open("GET", "./Scripts/paragraphs.json");
+        // step 3 - Executes the request
+        XHR.send();
+        // step 4 - register the readystate event 
+        XHR.addEventListener("readystatechange", function () {
+            if ((XHR.readyState === 4) && (XHR.status === 200)) {
+                let dataFile = JSON.parse(XHR.responseText);
+                let ParagraCont = dataFile.paragraphContent;
+                console.log(ParagraCont);
+                // Declare each paragraph by using classname and creating element
+                let jumbotron = document.getElementsByClassName("jumbotron")[0];
+                let HomePra = document.createElement("p");
+                 //Call paragraphs from 'paragraphs.json' file
+                HomePra.innerHTML = ParagraCont[0].Textcontent;
+                 // Print jumbotron
+                jumbotron.appendChild(HomePra);
+            }
+        });
+    }
+    function loadContactData() {
+        console.info("Contact Content Loading...");
+        // step 1 - creates the XHR object
+        let XHR = new XMLHttpRequest();
+        // step 2 - configures the message
+        XHR.open("GET", "./contact.html");
+        // step 3 - Executes the request
+        XHR.send();
+        XHR.addEventListener("readystatechange", function () {
+            if ((XHR.readyState === 4) && (XHR.status === 200)) {
+                let main = document.getElementsByTagName("main")[0];
+                let mainData = XHR.responseText;
+                main.innerHTML = mainData;
+                validateForm();
+            }
+        });
+    }
     function loadProjectData() {
         console.info("Project Loading...");
         // step 1 - creates the XHR object
@@ -177,43 +208,6 @@
             }
         });
     }
-
-    function loadContactData() {
-        console.info("Contact Content Loading...");
-        // step 1 - creates the XHR object
-        let XHR = new XMLHttpRequest();
-        // step 2 - configures the message
-        XHR.open("GET", "./contact.html");
-        // step 3 - Executes the request
-        XHR.send();
-        XHR.addEventListener("readystatechange", function () {
-            if ((XHR.readyState === 4) && (XHR.status === 200)) {
-                let main = document.getElementsByTagName("main")[0];
-                let mainData = XHR.responseText;
-                main.innerHTML = mainData;
-                validateForm();
-            }
-        });
-    }
-
-    // function for Load header
-    function loadHeader() {
-        console.info("Header Loading...");
-        // step 1 - creates the XHR object
-        let XHR = new XMLHttpRequest();
-        // step 2 - configures the message
-        XHR.open("GET", "./Scripts/Views/partials/header.html");
-        // step 3 - Executes the request
-        XHR.send();
-        XHR.addEventListener("readystatechange", function () {
-            if ((XHR.readyState === 4) && (XHR.status === 200)) {
-                let header = document.getElementsByTagName("header")[0];
-                let headerData = XHR.responseText;
-                header.innerHTML = headerData;
-            }
-        });
-    }
-
         // function for Load footer
     function loadFooter() {
         console.info("Footer Loading...");
@@ -232,31 +226,10 @@
         });
     }
 
-    // Set page content on the web address bar
-    function setPageContent(id) {
-        document.title = id;      
-        loadHeader();   
-        // content switcher     
-        switch (title) {
-            case "home":
-                loadHomeData();
-                break;
-            case "projects":
-                loadProjectData();
-                break;
-            case "contact":
-                loadContactData();
-                break;
-            default:
-                break;
-        }
-        loadFooter();
-    }
 
     // named function
     function Start() {
         setPageContent();
-        let title = highlightActiveLink();
     }
 
     window.addEventListener("load", Start);
