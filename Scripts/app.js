@@ -8,25 +8,18 @@
 
 // IIFE -Immediately Ivoked Function Expression
 (function () {
-
-    let title = document.title.toLowerCase();
-    function highlightActiveLink(id) 
-    {
+    function highlightActiveLink(id) {
         let navAnchors = document.querySelectorAll("li a");
-        for (const anchor of navAnchors) 
-        {
-         anchor.className = "nav-link";
+        for (const anchor of navAnchors) {
+            anchor.className = "nav-link";
         }
-        for (const anchor of navAnchors) 
-        {
+        for (const anchor of navAnchors) {
             let anchorString = anchor.getAttribute("id");
-            if (id === anchorString)
-            {
+            if (id === anchorString) {
                 anchor.className = "nav-link active";
             }
         }
     }
-
     function loadHomeData() {
         console.info("Homepage Loading...");
         highlightActiveLink();
@@ -241,10 +234,8 @@
 
     // Set page content on the web address bar
     function setPageContent(id) {
-        document.title = id;
-        highlightActiveLink(id);
+        document.title = id;      
         loadHeader();   
-
         // content switcher     
         switch (title) {
             case "home":
@@ -265,6 +256,7 @@
     // named function
     function Start() {
         setPageContent();
+        let title = highlightActiveLink();
     }
 
     window.addEventListener("load", Start);
