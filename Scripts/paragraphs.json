@@ -1,0 +1,15 @@
+{
+    "paragraphs":
+    [
+        {
+            "title": "home",
+            "Textcontent" : "Hello, my name is Seyeong Park. <br><br>I am a student in the Software Engineering Technology program at Centennial College.<p></p>My mission is to do well by doing good while supporting and elevating those around me."
+        },
+        {
+            "title": "projects",
+            "Projec1" : "I love to take photos and share them with friends. When I was high-school student, I had worked as a leader of Film club for 2 years. Whenever my friends and family set their profile image is took by me in social media, I feel like I am over the moon. Though I have been taking photos with my cell phone now, I will buy my own professional camera after earn money myself.",
+            "Projec2" : "I restarted to play the guitar. When I was young, my father toughs me how to play the guitar. However, I had not played that for a long time. Recently, I set a goal that is showing my playing guitar to my family and friends on the street. For this goal, I need to practice a lot. And also I like to sing, so I want to sing with my guitar." ,
+            "Projec3" : "I like to dance with k-pop music. So that reason, I had participated in every school talent show. I joined a team for the dance showcase since February 2020. I was supposed to deliver a performance in April this year, but It is postponed due to COVID-19. I hope to meet my team member and the music on the stage."
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "comp125-Assignment3-SeyeongPark-301088175",
+  "version": "1.0.0",
+  "description": "COMP125-Assignment3",
+  "main": "app.js",
+  "author": "Seyeong Park",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.1"
+  }
+}
