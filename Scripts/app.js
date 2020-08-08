@@ -106,7 +106,7 @@
                 case "home":
                     loadHomeData();
                     break;
-                case "contact":
+                case "cantact":
                     loadContactData();
                     break;
                 case "projects":
